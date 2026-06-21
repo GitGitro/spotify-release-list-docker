@@ -46,6 +46,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Lowercase repository name
+        id: repo
+        run: echo "name=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+
       - name: Build and push image
         if: steps.already_built.outputs.skip == 'false'
         uses: docker/build-push-action@v6
@@ -53,8 +57,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ steps.upstream.outputs.sha_short }}
-            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ steps.repo.outputs.name }}:${{ steps.upstream.outputs.sha_short }}
+            ghcr.io/${{ steps.repo.outputs.name }}:latest
           build-args: |
             REACT_APP_URL=${{ vars.REACT_APP_URL }}
             REACT_APP_SPOTIFY_CLIENT_ID=${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}
