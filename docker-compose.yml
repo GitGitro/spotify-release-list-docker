@@ -1,0 +1,10 @@
+services:
+    spotify-release-list:
+        image: ghcr.io/gitgitro/spotify-release-list:main
+        container_name: spotify-release-list
+        ports:
+            - 80:80
+        environment:
+            - REACT_APP_URL= #Public URL where you'll host it, e.g. https://your-domain.com
+            - REACT_APP_SPOTIFY_CLIENT_ID= #Your Spotify app client ID
+            - REACT_APP_SENTRY_DSN= #optional
