@@ -8,7 +8,7 @@ To get you started:
 ```
 services:
     spotify-release-list:
-        image: ghcr.io/gitgitro/spotify-release-list:main
+        image: ghcr.io/gitgitro/spotify-release-list-docker:latest
         container_name: spotify-release-list
         ports:
             - 80:80
