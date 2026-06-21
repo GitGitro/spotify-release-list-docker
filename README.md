@@ -3,7 +3,7 @@
 ghcr.io images for Spotify Release List
 Changes from the main [repo](https://github.com/jakubito/spotify-release-list) are pulled automatically
 
-A simple [docker-compose](./docker-compose.yaml) file is provided.
+A simple [docker-compose](./docker-compose.yml) file is provided.
 To get you started:
 ```
 services:
