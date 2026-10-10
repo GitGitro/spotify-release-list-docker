@@ -67,7 +67,6 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Tag this repo with the upstream SHA
-        if: steps.already_built.outputs.skip == 'false'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
