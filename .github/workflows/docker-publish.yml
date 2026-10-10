@@ -50,14 +50,6 @@ jobs:
         id: repo
         run: echo "name=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: name/app
-          tags: |
-            type=raw,value={{date 'YYYYMMDD'}}
-
       - name: Build and push image
         if: steps.already_built.outputs.skip == 'false'
         uses: docker/build-push-action@v6
@@ -65,7 +57,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ steps.repo.outputs.name }}:${{ steps.upstream.outputs.sha_short }}:${{ steps.meta.outputs.tags }}
+            ghcr.io/${{ steps.repo.outputs.name }}
             ghcr.io/${{ steps.repo.outputs.name }}:latest
           build-args: |
             REACT_APP_URL=${{ vars.REACT_APP_URL }}
